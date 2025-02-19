@@ -1,0 +1,249 @@
+#encabezado{
+    background-color: rgb(255, 255, 255);
+    text-align: center; 
+  }
+  
+  #encabezado h1{
+    margin: 0;
+    font-size: 24px;
+  }
+
+  body{
+    background-color: #2e4a70;
+  }
+  
+  h2{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+  }
+  
+  h1{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: white;
+  }
+  
+  h3{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: white;
+  }
+  
+  h5{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: white;
+  }
+  
+  #imgenbn{
+    width: 120px;
+    height: 100px;
+    float: inline-start;
+  }
+  
+  .cierre {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    width: 120px;
+    height: 100px;
+  }
+  
+  .cierre:hover {
+    background-color: #24b0ba;  
+    color: #000000;
+  }
+  
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    height: 100px;
+  }
+  
+  .menu li {
+    float: right;
+  }
+  
+  .menu li a:hover, .desp:hover .btn {
+    background-color: #000000;
+    
+  }
+  
+  .menu li.desp {
+    display: inline-block;
+  }
+  
+  .menu li a.active {
+    background: #000000;
+  }
+  
+  .cont_cj {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(144, 144, 144, 0.541);
+    z-index: 1;
+  }
+  
+  .cont_cj a {
+    color: #000000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .cont_cj a:hover {
+    background-color: #e9c2ec;
+  }
+  
+  .desp:hover .cont_cj {
+    display: block;
+  }
+  
+  .menu li a, btn{
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-shadow: #000000;
+    font-size: 18px;
+    text-align: center;
+    padding: 40px 40px;
+    text-decoration: none;
+    height: 21px;
+  }
+  
+  form{
+    display:block;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    width: 320px;
+    height: 100%;
+    padding: 55px;
+    color: white;
+  }
+  form h2 {
+    margin-bottom: 30px;
+  }
+  form label {
+    display: block;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+  form input[type="tel"],
+  form input[type="file"],
+  form input[type="number"],
+  form input[type="input"],
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"] {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 11px;
+    border: 2px solid #ccc;
+    border-radius: 7px;
+  }
+  
+  select{
+  width: 100%;
+    padding: 11px;
+    margin-bottom: 11px;
+    border: 2px solid #ccc;
+    border-radius: 7px;
+  }
+  
+  form button {
+    width: 120px;
+    padding: 11px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    height: 40px;
+  }
+  .btn{
+  width: 120px;
+    padding: 11px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    height: 40px;
+  }
+  
+  .boton{
+  width: 200px;
+    padding: 11px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    height: 40px;
+  }
+  
+  .boton2{
+  width: 100px;
+    padding: 11px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    height: 40px;
+  }
+  
+  form button:hover {
+    background-color: rgb(255, 255, 255);
+    background: #24b0ba;
+    color: rgb(255, 255, 255);
+  }
+  
+  strong{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .cierre{
+    background-color: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      width: 120px;
+      height: 80px;
+  }
+  
+  .cierre:hover {
+    background-color: #24b0ba;  
+    color: #000000;
+  }
+  
+  
