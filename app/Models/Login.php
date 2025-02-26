@@ -11,10 +11,11 @@ class Login extends Model implements Authenticatable
 {
     use HasFactory, AuthenticatableTrait;
     protected $table = 'tb_login';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_login';
     protected $fillable =  [
         'nombre',
-        'apellido',
+        'app',
+        'apm',
         'email',
         'password',
         'rol',

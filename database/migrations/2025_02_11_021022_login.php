@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_login', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_login');
             $table->string('nombre', 50);
-            $table->string('apellido', 50);
+            $table->string('app', 50);
+            $table->string('apm', 50);
             $table->string('email');
             $table->string('password');
             $table->string('rol')->default('user');

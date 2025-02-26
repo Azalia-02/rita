@@ -34,10 +34,18 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingApellido">Ingresa tu apellido(s)</label>
-                    <input type="text" class="form-control" name="apellido" value="{{ old('apellido') }}" id="floatingApellido" placeholder="ejemplo: Mejía" aria-describedby="ApellidoHelp">
-                    <div id="ApellidoHelp" class="form-text">
-                        @if($errors->first('apellido')) <i>¡El campo Apellido(s) no es correcto!</i> @endif
+                <label for="floatingApp">Ingresa tu apellido(s)</label>
+                    <input type="text" class="form-control" name="app" value="{{ old('app') }}" id="floatingApp" placeholder="ejemplo: Mejía" aria-describedby="ApellidoHelp">
+                    <div id="AppHelp" class="form-text">
+                        @if($errors->first('app')) <i>¡El campo Apellido(s) no es correcto!</i> @endif
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                <label for="floatingApm">Ingresa tu apellido(s)</label>
+                    <input type="text" class="form-control" name="apm" value="{{ old('apm') }}" id="floatingApm" placeholder="ejemplo: Mejía" aria-describedby="ApellidoHelp">
+                    <div id="ApmHelp" class="form-text">
+                        @if($errors->first('apm')) <i>¡El campo Apellido(s) no es correcto!</i> @endif
                     </div>
                 </div>
 
