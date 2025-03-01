@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class ControladorUsuario extends Controller
 {
-    public function home_user(){
+    public function user_graficas(){
 
-        return view('home_user');
+        return view('user_graficas');
     }
 }

@@ -33,7 +33,7 @@ class ControladorLogin extends Controller
             if ($user->rol == 'admin') {
                 return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
             } else {
-                return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                return redirect()->route('user_graficas')->with('success', 'Has iniciado sesión como usuario.');
             }
         } else {
             return redirect()->route('login')->withErrors('El usuario no tiene un rol asignado.');
@@ -104,6 +104,6 @@ class ControladorLogin extends Controller
         if($role == 'admin'){
             return redirect()->route('panel_admin');
         }
-        return redirect()->route('home_user');
+        return redirect()->route('user_graficas');
     }
 }

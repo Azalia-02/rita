@@ -5,8 +5,6 @@ use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorUsuario;
 use App\Http\Controllers\ControladorPanel;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,13 +20,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::name('login')->get('/login',[ControladorLogin::class, 'login']);
-Route::name('login_aceptar')->post('/login_aceptar',[ControladorLogin::class, 'login_aceptar']);
-Route::name('login_alta')->get('/login_alta',[ControladorLogin::class, 'login_alta']);
-Route::name('login_registrar')->post('/login_registrar',[ControladorLogin::class, 'login_registrar']);
-Route::name('logados')->get('/logados',[ControladorLogin::class, 'logados']);
-Route::name('logout')->post('/logout',[ControladorLogin::class, 'logout']);
+Route::name('login')->get('/login', [ControladorLogin::class, 'login']);
+Route::name('login_aceptar')->post('/login_aceptar', [ControladorLogin::class, 'login_aceptar']);
+Route::name('login_alta')->get('/login_alta', [ControladorLogin::class, 'login_alta']);
+Route::name('login_registrar')->post('/login_registrar', [ControladorLogin::class, 'login_registrar']);
+Route::name('logados')->get('/logados', [ControladorLogin::class, 'logados']);
+Route::name('logout')->post('/logout', [ControladorLogin::class, 'logout']);
 
-Route::name('home_user')->get('/home_user',[ControladorUsuario::class, 'home_user'])->middleware('auth');
+Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user'])->middleware('auth');
+Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin'])->middleware('auth');
 
-Route::name('panel_admin')->get('/panel_admin',[ControladorPanel::class, 'panel_admin'])->middleware('auth');
+// Rutas agregadas para las gráficas
+Route::name('user_graficas')->get('/user_graficas', [ControladorUsuario::class, 'user_graficas'])->middleware('auth');
+Route::name('admin_graficas')->get('/admin_graficas', [ControladorUsuario::class, 'admin_graficas'])->middleware('auth');
