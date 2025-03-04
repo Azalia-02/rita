@@ -31,5 +31,7 @@ Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_us
 Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin'])->middleware('auth');
 
 // Rutas agregadas para las gráficas
+Route::name('user_tabla')->get('/user_tabla', [ControladorUsuario::class, 'user_tabla'])->middleware('auth');
 Route::name('user_graficas')->get('/user_graficas', [ControladorUsuario::class, 'user_graficas'])->middleware('auth');
-Route::name('admin_graficas')->get('/admin_graficas', [ControladorUsuario::class, 'admin_graficas'])->middleware('auth');
+Route::name('medico')->get('/medico', [ControladorUsuario::class, 'medico'])->middleware('auth');
+
