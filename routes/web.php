@@ -16,9 +16,9 @@ use App\Http\Controllers\ControladorPanel;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::name('login')->get('/login', [ControladorLogin::class, 'login']);
 Route::name('login_aceptar')->post('/login_aceptar', [ControladorLogin::class, 'login_aceptar']);
@@ -30,6 +30,5 @@ Route::name('logout')->post('/logout', [ControladorLogin::class, 'logout']);
 Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user'])->middleware('auth');
 Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin'])->middleware('auth');
 
-// Rutas agregadas para las gráficas
-Route::name('user_graficas')->get('/user_graficas', [ControladorUsuario::class, 'user_graficas'])->middleware('auth');
-Route::name('admin_graficas')->get('/admin_graficas', [ControladorUsuario::class, 'admin_graficas'])->middleware('auth');
+
+

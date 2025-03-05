@@ -58,25 +58,29 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingPassword">Ingresa tu contraseña</label>
-                    <input type="password" class="form-control" name="password" id="floatingPassword">
-                    <div id="PasswordHelp" class="form-text">
-                        @if($errors->first('password')) <i>¡El campo contraseña no es correcto!</i> @endif
-                    </div>
+                <label for="FloatingPassword">Ingresa tu contraseña</label>
+                   <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="floatingPassword" placeholder="Ingresa tu contraseña">
+                   @error('password')
+                       <div class="invalid-feedback">
+                           {{ $message }}
+                       </div>
+                    @enderror
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingRPassword">Repite tu contraseña</label>
-                    <input type="password" class="form-control" name="rpassword" id="floatingRPassword">
-                    <div id="RPasswordHelp" class="form-text">
-                        @if($errors->first('rpassword')) <i>¡El campo de repetir contraseña no es correcto!</i> @endif
-                    </div>
+                <label for="floatingPasswordConfirmation">Repite tu contraseña</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" id="floatingPasswordConfirmation" placeholder="Repite tu contraseña">
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-floating mb-3">
                     <label for="rol">Selecciona el rol</label>
                     <select name="rol" class="form-control" id="rol">
-                    <option value="usuario" {{ old('rol') == 'usuario' ? 'selected' : '' }}>Usuario</option>
+                    <option value="user" {{ old('rol') == 'user' ? 'selected' : '' }}>Usuario</option>
                     <option value="admin" {{ old('rol') == 'admin' ? 'selected' : '' }}>Administrador</option>
                     </select>
                     <div class="form-text">
@@ -87,9 +91,9 @@
                 <hr><br>
 
                 <button type="submit" class="btn btn-primary">Guardar</button>
-<a href="{{ route('login') }}">
-<button type="button" class="btn btn-danger">Cancelar</button>
-</a>
+                <a href="{{ route('login') }}">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+                </a>
             </form>
         </center>
     </div>

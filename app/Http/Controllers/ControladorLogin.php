@@ -3,18 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 
 class ControladorLogin extends Controller
 {
     public function login(){
-
-	    if (Auth::check()) {
-	        return $this->redireccionarPorRol(Auth::user()->rol);
-	    }
-	    return view('login');
+        return view('login');
     }
 
     public function login_aceptar(Request $request){
@@ -23,76 +20,140 @@ class ControladorLogin extends Controller
         'password' => 'required',
     ]);
 
-    $credentials = $request->only('email', 'password');
+    $response = Http::get('http://localhost:3000/api/redirige/', [
+        'email' => $request->email,
+        'password' => $request->password,
+    ]);
 
-    if (Auth::attempt($credentials)) {
-        $user = Auth::user();
+    if ($response->successful()) {
+        $user = $response->json();
 
-        if ($user && $user->rol) {
-            
-            if ($user->rol == 'admin') {
-                return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
+        \Log::info('Datos del usuario obtenidos de la API:', $user);
+
+        if ($user && isset($user['password'])) {
+            \Log::info('Contraseña proporcionada:', [$request->password]);
+            \Log::info('Contraseña almacenada (hash):', [$user['password']]);
+
+            if (strpos($user['password'], '$2b$') === 0) {
+                if (Hash::check($request->password, trim($user['password']))) {
+                    \Log::info('Contraseña válida. Redirigiendo según el rol...');
+
+                    if (isset($user['rol'])) {
+                        switch ($user['rol']) {
+                            case 'admin':
+                                return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
+                            case 'user':
+                                return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                            default:
+                                return redirect()->route('login')->withErrors('Rol no válido.');
+                        }
+                    } else {
+                        return redirect()->route('login')->withErrors('El rol del usuario no está definido.');
+                    }
+                } else {
+                    \Log::error('Contraseña incorrecta. Verifica las credenciales.');
+
+                    return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
+                }
             } else {
-                return redirect()->route('user_graficas')->with('success', 'Has iniciado sesión como usuario.');
+                \Log::error('El hash de la contraseña no es válido.');
+
+                return redirect()->route('login')->withErrors('Error en el formato de la contraseña.');
             }
         } else {
-            return redirect()->route('login')->withErrors('El usuario no tiene un rol asignado.');
+            \Log::error('El usuario no tiene contraseña en la respuesta de la API.');
+
+            return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
         }
     } else {
-        return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
-    }}
-    
+        \Log::error('Error en la comunicación con la API:', [
+            'status' => $response->status(),
+            'body' => $response->body(),
+        ]);
+
+        return redirect()->route('login')->withErrors('Error al comunicarse con el servidor.');
+    }
+  }
 
     public function login_alta(){
         return view("login_alta");
     }
 
     public function login_registrar(Request $request){
-    $this->validate($request, [
-        'nombre' => 'required',
-        'app' => 'required',
-        'apm' => 'required',
-        'email' => 'required|email|unique:tb_login,email',
-        'password' => 'required|min:8',
-        'rpassword' => 'required|same:password',
-        'rol' => 'required|in:usuario,admin',  
+
+        $request->validate([
+        'nombre' => 'required|string|max:255',
+        'app' => 'required|string|max:255',
+        'apm' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:tb_login',
+        'password' => [
+            'required',
+            'string',
+            'min:8',
+            'confirmed',
+            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+        ],
+        'rol' => 'required|string|in:admin,user',
+    ], [
+        'nombre.required' => 'El campo nombre es obligatorio',
+        'app.required' => 'El campo apellido paterno es obligatorio',
+        'apm.required' => 'El campo apellido materno es obligatorio',
+        'email.required' => 'El campo correo electrónico es obligatorio',
+        'email.email' => 'El correo electrónico no es válido',
+        'email.unique' => 'Este correo electrónico ya está registrado',
+        'password.required' => 'El campo contraseña es obligatorio',
+        'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+        'password.confirmed' => 'Las contraseñas no coinciden',
+        'password.regex' => 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un carácter especial',
+        'rol.in' => 'El rol no es válido. Debe ser "admin" o "user".',
     ]);
 
-    $hashedPassword = bcrypt($request->input('password'));
-
-    $user = Login::create([
+    $response = Http::post('http://localhost:3000/api/registros/', [
         'nombre' => $request->input('nombre'),
         'app' => $request->input('app'),
         'apm' => $request->input('apm'),
         'email' => $request->input('email'),
-        'password' => $hashedPassword,
+        'password' => $request->input('password'),
         'rol' => $request->input('rol'),
+        'created_at' => now(),
+        'updated_at' => now(),
     ]);
 
-    if (!$user) {
-        return redirect()->route('login')->withErrors('No se pudo crear el usuario.');
-    }
-    $credentials = $request->only('email', 'password');
-
-    if (Auth::attempt($credentials)) {
-        $user = Auth::user();
-
-        if ($user && $user->rol) {
+    if ($response->successful()) {
+        $user = Http::get('http://localhost:3000/api/redirige/', [
+            'email' => $request->email,
+        ])->json();
+    
+        if ($user && isset($user['password']) && Hash::check($request->password, trim($user['password']))) {
+            dd($request->password, $user['password']);
             
-            if ($user->rol == 'admin') {
-                return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
+            if (Hash::check($request->password, $user['password'])) {
+                
+                Auth::loginUsingId($user['id_login']);
+                if (Auth::check()) {
+                    if (isset($user['rol'])) {
+                        if ($user['rol'] == 'admin') {
+                            return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
+                        } else {
+                            return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                        }
+                    } else {
+                        return redirect()->route('login')->withErrors('El rol del usuario no está definido.');
+                    }
+                } else {
+                    return redirect()->route('login')->withErrors('No se pudo autenticar al usuario.');
+                }
             } else {
-                return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
             }
         } else {
-            return redirect()->route('login')->withErrors('El usuario no tiene un rol asignado.');
+            return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
         }
-    } else {
-        return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
-    }}
+    }
+  }  
+           
 
-    public function logout(Request $request)
-    {
+    public function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -107,3 +168,4 @@ class ControladorLogin extends Controller
         return redirect()->route('user_graficas');
     }
 }
+
