@@ -30,5 +30,12 @@ Route::name('logout')->post('/logout', [ControladorLogin::class, 'logout']);
 Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user'])->middleware('auth');
 Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin'])->middleware('auth');
 
+<<<<<<< HEAD
 
+=======
+// Rutas agregadas para las gráficas
+Route::name('user_tabla')->get('/user_tabla', [ControladorUsuario::class, 'user_tabla'])->middleware('auth');
+Route::name('user_graficas')->get('/user_graficas', [ControladorUsuario::class, 'user_graficas'])->middleware('auth');
+Route::name('medico')->get('/medico', [ControladorUsuario::class, 'medico'])->middleware('auth');
+>>>>>>> 25327f4e5a27b7a6f5d1f1c0d04ee216cd939f40
 

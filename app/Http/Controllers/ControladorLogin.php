@@ -56,9 +56,13 @@ class ControladorLogin extends Controller
                     return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
                 }
             } else {
+<<<<<<< HEAD
                 \Log::error('El hash de la contraseña no es válido.');
 
                 return redirect()->route('login')->withErrors('Error en el formato de la contraseña.');
+=======
+                return redirect()->route('user_tabla')->with('success', 'Has iniciado sesión como usuario.');
+>>>>>>> 25327f4e5a27b7a6f5d1f1c0d04ee216cd939f40
             }
         } else {
             \Log::error('El usuario no tiene contraseña en la respuesta de la API.');
@@ -165,7 +169,7 @@ class ControladorLogin extends Controller
         if($role == 'admin'){
             return redirect()->route('panel_admin');
         }
-        return redirect()->route('user_graficas');
+        return redirect()->route('user_tabla');
     }
 }
 
