@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControladorLogin;
 use App\Http\Controllers\ControladorUsuario;
 use App\Http\Controllers\ControladorPanel;
+use App\Http\Controllers\ControladorPacientes;
+use App\Http\Controllers\ControladorMedicos;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +40,28 @@ Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel
 //Route::name('user_graficas')->get('/user_graficas', [ControladorUsuario::class, 'user_graficas'])->middleware('auth');
 //Route::name('medico')->get('/medico', [ControladorUsuario::class, 'medico'])->middleware('auth');
 
+
+//-----------------------------Rutas_pacientes-------------------------------------------------------------------
+Route::name('pacientes')->get('/pacientes',[ControladorPacientes::class, 'pacientes']);
+Route::name('paciente_alta')->get('/paciente_alta', [ControladorPacientes::class, 'paciente_alta']);
+Route::name('paciente_registrar')->post('/paciente_registrar', [ControladorPacientes::class, 'paciente_registrar']);
+
+Route::name('paciente_detalle')->get('/paciente_detalle/{id}', [ControladorPacientes::class, 'paciente_detalle']);
+Route::name('paciente_actualizar')->get('/paciente_actualizar/{id}', [ControladorPacientes::class, 'paciente_actualizar']);
+Route::name('paciente_salvar')->post('/paciente_salvar/{id}', [ControladorPacientes::class, 'paciente_salvar']);
+Route::name('paciente_borrar')->get('/paciente_borrar/{id}', [ControladorPacientes::class, 'paciente_borrar']);
+
+//------------------------Exportacion e Importación excel--------------------------------------------------------------------------
+Route::post('/pacientes/import', [ControladorPacientes::class, 'import'])->name('import.pacientes');
+Route::get('/export-pacientes', [ControladorPacientes::class, 'export'])->name('export-pacientes');
+
+
+//-----------------------------Rutas_medicos--------------------------------------------------------------------
+Route::name('medicos')->get('/medicos',[ControladorMedicos::class, 'medicos']);
+Route::name('medico_alta')->get('/medico_alta', [ControladorMedicos::class, 'medico_alta']);
+Route::name('medico_registrar')->post('/medico_registrar', [ControladorMedicos::class, 'medico_registrar']);
+
+Route::name('medico_detalle')->get('/medico_detalle/{id}', [ControladorMedicos::class, 'medico_detalle']);
+Route::name('medico_actualizar')->get('/medico_actualizar/{id}', [ControladorMedicos::class, 'medico_actualizar']);
+Route::name('medico_salvar')->post('/medico_salvar/{id}', [ControladorMedicos::class, 'medico_salvar']);
+Route::name('medico_borrar')->get('/medico_borrar/{id}', [ControladorMedicos::class, 'medico_borrar']);
