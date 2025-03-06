@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div id="encabezado">
@@ -58,14 +59,20 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="FloatingPassword">Ingresa tu contraseña</label>
+                <label for="floatingPassword">Ingresa tu contraseña</label>
+                   <div class="input-group">
                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="floatingPassword" placeholder="Ingresa tu contraseña">
-                   @error('password')
-                       <div class="invalid-feedback">
-                           {{ $message }}
-                       </div>
-                    @enderror
-                </div>
+                   <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                   <i class="fa fa-eye">
+                   </button>
+                   </input>
+                   </div>
+                       @error('password')
+                   <div class="invalid-feedback">
+                       {{ $message }}
+                   </div>
+                       @enderror
+                   </div>
 
                 <div class="form-floating mb-3">
                 <label for="floatingPasswordConfirmation">Repite tu contraseña</label>
@@ -99,4 +106,22 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#floatingPassword');
+
+        togglePassword.addEventListener('click', function () {
+            // Cambia el tipo de input entre 'password' y 'text'
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Cambia el ícono del ojo
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    });
+</script>
 

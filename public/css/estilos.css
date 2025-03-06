@@ -245,5 +245,13 @@
     background-color: #24b0ba;  
     color: #000000;
   }
+
+#togglePassword {
+    width: 100%;
+    padding: 11px;
+    margin-bottom: 11px;
+    border: 2px solid #ccc;
+    border-radius: 7px;
+}
   
   

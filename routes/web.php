@@ -27,8 +27,8 @@ Route::name('login_registrar')->post('/login_registrar', [ControladorLogin::clas
 Route::name('logados')->get('/logados', [ControladorLogin::class, 'logados']);
 Route::name('logout')->post('/logout', [ControladorLogin::class, 'logout']);
 
-Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user'])->middleware('auth');
-Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin'])->middleware('auth');
+Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user']);
+Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin']);
 
 
 // Rutas agregadas para las gráficas

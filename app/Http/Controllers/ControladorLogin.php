@@ -34,12 +34,21 @@ class ControladorLogin extends Controller
             $isPasswordValid = password_verify($request->password, $hashedPassword);
 
             if ($isPasswordValid) {
+                
                 if (isset($user['rol'])) {
                     switch ($user['rol']) {
                         case 'admin':
-                            return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
+                            $response = Http::get('http://localhost:3000/api/pacientes/');
+                            if ($response->successful()) {
+                                $paciente = $response->json();
+                                return redirect()->route('panel_admin', compact('paciente'))->with('success', 'Has iniciado sesión como administrador.');
+                            } else {
+                                return redirect()->route('login')->withErrors('Error al obtener los datos de los pacientes.');
+                            }
+                    
                         case 'user':
                             return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                    
                         default:
                             return redirect()->route('login')->withErrors('Rol no válido.');
                     }
@@ -64,9 +73,9 @@ class ControladorLogin extends Controller
     public function login_registrar(Request $request){
 
         $request->validate([
-        'nombre' => 'required|string|max:255',
-        'app' => 'required|string|max:255',
-        'apm' => 'required|string|max:255',
+        'nombre' => 'required|string|max:255|regex:/^[\pL\s]+$/u',
+        'app' => 'required|string|max:255|regex:/^[\pL\s]+$/u',
+        'apm' => 'required|string|max:255|regex:/^[\pL\s]+$/u',
         'email' => 'required|string|email|max:255|unique:tb_login',
         'password' => [
             'required',
@@ -78,8 +87,11 @@ class ControladorLogin extends Controller
         'rol' => 'required|string|in:admin,user',
     ], [
         'nombre.required' => 'El campo nombre es obligatorio',
+        'nombre.regex' => 'El campo nombre solo puede contener letras',
         'app.required' => 'El campo apellido paterno es obligatorio',
+        'app.regex' => 'El campo apellido áterno solo puede contener letras',
         'apm.required' => 'El campo apellido materno es obligatorio',
+        'apm.regex' => 'El campo apellido materno solo puede contener letras',
         'email.required' => 'El campo correo electrónico es obligatorio',
         'email.email' => 'El correo electrónico no es válido',
         'email.unique' => 'Este correo electrónico ya está registrado',
@@ -102,35 +114,9 @@ class ControladorLogin extends Controller
     ]);
 
     if ($response->successful()) {
-        $user = Http::get('http://localhost:3000/api/redirige/', [
-            'email' => $request->email,
-        ])->json();
-    
-        if ($user && isset($user['password']) && Hash::check($request->password, trim($user['password']))) {
-            dd($request->password, $user['password']);
-            
-            if (Hash::check($request->password, $user['password'])) {
-                
-                Auth::loginUsingId($user['id_login']);
-                if (Auth::check()) {
-                    if (isset($user['rol'])) {
-                        if ($user['rol'] == 'admin') {
-                            return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
-                        } else {
-                            return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
-                        }
-                    } else {
-                        return redirect()->route('login')->withErrors('El rol del usuario no está definido.');
-                    }
-                } else {
-                    return redirect()->route('login')->withErrors('No se pudo autenticar al usuario.');
-                }
-            } else {
-                return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
-            }
-        } else {
-            return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
-        }
+        return redirect()->route('login')->with('success', 'Registro exitoso. Por favor, inicia sesión.');
+    } else {
+        return redirect()->route('login')->withErrors('Error al comunicarse con el servidor.');
     }
   }  
            
@@ -142,12 +128,5 @@ class ControladorLogin extends Controller
         return redirect('/login');
     }
 
-    private function redireccionarPorRol($role)
-    {
-        if($role == 'admin'){
-            return redirect()->route('panel_admin');
-        }
-        return redirect()->route('user_tabla');
-    }
 }
 
