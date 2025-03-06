@@ -65,3 +65,7 @@ Route::name('medico_detalle')->get('/medico_detalle/{id}', [ControladorMedicos::
 Route::name('medico_actualizar')->get('/medico_actualizar/{id}', [ControladorMedicos::class, 'medico_actualizar']);
 Route::name('medico_salvar')->post('/medico_salvar/{id}', [ControladorMedicos::class, 'medico_salvar']);
 Route::name('medico_borrar')->get('/medico_borrar/{id}', [ControladorMedicos::class, 'medico_borrar']);
+
+//------------------------Exportacion e Importación excel--------------------------------------------------------------------------
+Route::post('/medicos/import', [ControladorMedicos::class, 'import'])->name('import.medicos');
+Route::get('/export-medicos', [ControladorMedicos::class, 'export'])->name('export-medicos');

@@ -27,6 +27,16 @@
             </a>
         </p>
 
+        <a href="{{ route('export-medicos', ['search' => request('buscar')]) }}" class="btn btn-success">
+        Exportar a Excel
+        </a>
+
+        <form action="{{ route('import.medicos') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" required>
+                <button type="submit" class="btn btn-primary btn-sm">Importar Excel</button>
+        </form>
+
         <hr><br>
 
         <table class="table">

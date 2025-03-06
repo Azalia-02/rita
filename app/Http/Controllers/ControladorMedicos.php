@@ -4,9 +4,94 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use App\Exports\MedicosExport;
+use Carbon\Carbon;
 
 class ControladorMedicos extends Controller
 {
+
+    public function export(Request $request)
+{
+    // Obtener los filtros desde la solicitud
+    $search = $request->input('search');
+
+    // Si hay un filtro, aplicar la búsqueda
+    $query = DB::table('tb_medicos');
+
+    if (!empty($search)) {
+        $query->where('clave', 'LIKE', "%$search%")
+              ->orWhere('nombre', 'LIKE', "%$search%")
+              ->orWhere('app', 'LIKE', "%$search%")
+              ->orWhere('apm', 'LIKE', "%$search%")
+              ->orWhere('sex', 'LIKE', "%$search%")
+              ->orWhere('tel', 'LIKE', "%$search%");
+    } 
+
+    $medicos = $query->get(); // Ejecutar la consulta
+
+    return Excel::download(new MedicosExport($medicos), 'medicos.xlsx');
+}
+
+
+    public function import(Request $request)
+    {
+        // Verificar si se subió un archivo
+        if (!$request->hasFile('file')) {
+            return back()->with('error', 'No se ha subido ningún archivo.');
+        }
+    
+        $file = $request->file('file');
+        $data = Excel::toArray([], $file)[0]; // Leer la primera hoja del archivo
+    
+        // Verificar que hay datos
+        if (empty($data) || count($data) < 2) {
+            return back()->with('error', 'El archivo está vacío o no tiene datos válidos.');
+        }
+    
+        // Saltar la primera fila (encabezados)
+        unset($data[0]);
+    
+        $insertados = 0;
+        $duplicados = 0;
+
+        
+    
+        foreach ($data as $row) {
+            $email = $row[8]; // Suponiendo que el teléfono está en la columna 6 (índice 5)
+    
+            // Verificar si el teléfono ya existe en la base de datos
+            $existe = DB::table('tb_medicos')->where('email', $email)->exists();
+    
+            if (!$existe) {
+                // Convertir la fecha de Excel a formato MySQL (YYYY-MM-DD)
+                $fechaNacimiento = is_numeric($row[5]) ? Date::excelToDateTimeObject($row[5])->format('Y-m-d') : null;
+                $now = Carbon::now();
+                // Insertar solo si la fecha es válida
+                DB::table('tb_medicos')->insert([
+                    'clave' => $row[1], 
+                    'nombre' => $row[2], 
+                    'app' => $row[3], 
+                    'apm' => $row[4],
+                    'fn' => $fechaNacimiento, // Fecha de nacimiento
+                    'sex' => $row[6], 
+                    'tel' => $row[7], // Teléfono
+                    'email' => $email,
+                    'created_at' => $now, // Fecha de creación
+                    'updated_at' => $now  // Fecha de actualización
+
+                ]);
+    
+                $insertados++;
+            } else {
+                $duplicados++;
+            }
+        }
+    
+        return back()->with('success', "Importación completada. Insertados: $insertados | Duplicados: $duplicados");
+    }
 
     public function medicos(Request $request)
     {

@@ -31,8 +31,6 @@
         Exportar a Excel
         </a>
 
-
-
             <form action="{{ route('import.pacientes') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" required>
