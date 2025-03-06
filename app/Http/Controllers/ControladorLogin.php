@@ -20,7 +20,7 @@ class ControladorLogin extends Controller
         'password' => 'required',
     ]);
 
-    $response = Http::get('http://localhost:3000/api/redirige/', [
+    $response = Http::post('http://localhost:3000/api/redirige/', [
         'email' => $request->email,
         'password' => $request->password,
     ]);
@@ -28,53 +28,31 @@ class ControladorLogin extends Controller
     if ($response->successful()) {
         $user = $response->json();
 
-        \Log::info('Datos del usuario obtenidos de la API:', $user);
-
         if ($user && isset($user['password'])) {
-            \Log::info('Contraseña proporcionada:', [$request->password]);
-            \Log::info('Contraseña almacenada (hash):', [$user['password']]);
+            $hashedPassword = trim($user['password']);
 
-            if (strpos($user['password'], '$2b$') === 0) {
-                if (Hash::check($request->password, trim($user['password']))) {
-                    \Log::info('Contraseña válida. Redirigiendo según el rol...');
+            $isPasswordValid = password_verify($request->password, $hashedPassword);
 
-                    if (isset($user['rol'])) {
-                        switch ($user['rol']) {
-                            case 'admin':
-                                return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
-                            case 'user':
-                                return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
-                            default:
-                                return redirect()->route('login')->withErrors('Rol no válido.');
-                        }
-                    } else {
-                        return redirect()->route('login')->withErrors('El rol del usuario no está definido.');
+            if ($isPasswordValid) {
+                if (isset($user['rol'])) {
+                    switch ($user['rol']) {
+                        case 'admin':
+                            return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
+                        case 'user':
+                            return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                        default:
+                            return redirect()->route('login')->withErrors('Rol no válido.');
                     }
                 } else {
-                    \Log::error('Contraseña incorrecta. Verifica las credenciales.');
-
-                    return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
+                    return redirect()->route('login')->withErrors('El rol del usuario no está definido.');
                 }
             } else {
-<<<<<<< HEAD
-                \Log::error('El hash de la contraseña no es válido.');
-
-                return redirect()->route('login')->withErrors('Error en el formato de la contraseña.');
-=======
-                return redirect()->route('user_tabla')->with('success', 'Has iniciado sesión como usuario.');
->>>>>>> 25327f4e5a27b7a6f5d1f1c0d04ee216cd939f40
+                return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
             }
         } else {
-            \Log::error('El usuario no tiene contraseña en la respuesta de la API.');
-
             return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
         }
     } else {
-        \Log::error('Error en la comunicación con la API:', [
-            'status' => $response->status(),
-            'body' => $response->body(),
-        ]);
-
         return redirect()->route('login')->withErrors('Error al comunicarse con el servidor.');
     }
   }
