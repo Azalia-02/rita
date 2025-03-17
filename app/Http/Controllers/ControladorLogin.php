@@ -38,12 +38,10 @@ class ControladorLogin extends Controller
                 if (isset($user['rol'])) {
                     switch ($user['rol']) {
                         case 'admin':
-                            $response = Http::get('http://localhost:3000/api/pacientes/');
                             if ($response->successful()) {
-                                $paciente = $response->json();
-                                return redirect()->route('panel_admin', compact('paciente'))->with('success', 'Has iniciado sesión como administrador.');
+                                return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
                             } else {
-                                return redirect()->route('login')->withErrors('Error al obtener los datos de los pacientes.');
+                                return redirect()->route('login')->withErrors('Error al obtener los datos de los admiistradores.');
                             }
                     
                         case 'user':

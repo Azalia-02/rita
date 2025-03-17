@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/mestilos.css') }}">
     <title>Lista de Medicos</title>
 </head>
 <body>
+    <div id="encabezado">
+        <img src="{{ 'img/dinologin.jpg' }}" alt="logo empresa" id="imgenbn">
+        <h1>Administrador</h1>
+    </div>
 
     <div class="container">
         <hr><br>
         <h3>Lista de Medicos</h3>
 
         <!-- Barra de búsqueda -->
-        <form action="{{ route('medicos') }}" method="GET">
-            <div class="input-group mb-3">
+        <form action="{{ route('medicos') }}" method="GET" class="search-form">
+            <div class="input-group">
                 <input type="text" class="form-control" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar medico...">
                 <button type="submit" class="btn btn-primary">Buscar</button>
                 <a href="{{ route('medicos') }}" class="btn btn-danger">Reiniciar</a>
@@ -27,15 +31,16 @@
             </a>
         </p>
 
-        <a href="{{ route('export-medicos', ['search' => request('buscar')]) }}" class="btn btn-success">
-        Exportar a Excel
-        </a>
-
-        <form action="{{ route('import.medicos') }}" method="POST" enctype="multipart/form-data">
+        <div class="export-import-buttons">
+            <a href="{{ route('export-medicos', ['search' => request('buscar')]) }}" class="btn btn-success">
+                Exportar a Excel
+            </a>
+            <form action="{{ route('import.medicos') }}" method="POST" enctype="multipart/form-data" class="import-form">
                 @csrf
                 <input type="file" name="file" required>
                 <button type="submit" class="btn btn-primary btn-sm">Importar Excel</button>
-        </form>
+            </form>
+        </div>
 
         <hr><br>
 
@@ -72,7 +77,8 @@
                 @endfor
             </ul>
         </nav>
-    </div>
 
+        <a href="{{ route('panel_admin') }}" class="boton">Volver</a>
+    </div>
 </body>
 </html>
