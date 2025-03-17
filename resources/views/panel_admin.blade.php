@@ -27,7 +27,7 @@
     <div class="slideshow-container">
         <div class="carousel" id="carousel">
             <div class="carousel-item">
-                <img src="{{ asset('img/medicos.jpg') }}" alt="Medicos">
+                <img src="{{ asset('img/medicos.png') }}" alt="Medicos">
                 <div class="content">
                     <a href="{{ route('medicos') }}" class="btn btn-default btn-lg">Médicos</a>
                 </div>
@@ -36,6 +36,12 @@
                 <img src="{{ asset('img/pacientes.png') }}" alt="Pacientes">
                 <div class="content">
                     <a href="{{ route('pacientes') }}" class="btn btn-default btn-lg">Pacientes</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('img/citas.png') }}" alt="Citas">
+                <div class="content">
+                    <a href="{{ route('panel_admin') }}" class="btn btn-default btn-lg">Citas</a>
                 </div>
             </div>
             <div class="carousel-item">
