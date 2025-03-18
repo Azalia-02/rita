@@ -64,9 +64,9 @@ class ControladorProductos extends Controller
     public function producto_salvar(Request $request, $id){
     if ($request->hasFile('imagen')) {
         $fotoPath = $request->file('imagen')->store('img', 'public');
-        $fotoUrl = str_replace('public/', '', $fotoPath); 
+        $fotoUrl = $fotoPath;
     } else {
-        $fotoUrl = $request->foto_actual;
+        $fotoUrl = $request->imagen_actual;
     }
 
     $response = Http::put('http://localhost:3000/api/productos/' . $id, [
@@ -74,13 +74,13 @@ class ControladorProductos extends Controller
         'precio' => $request->precio,
         'descripcion' => $request->descripcion,
         'stock' => $request->stock,
-        'imagen' => $fotoUrl,
+        'imagen' => $fotoUrl, 
     ]);
 
     if ($response->successful()) {
-        return redirect()->route('productos');
+        return redirect()->route('productos'); 
     } else {
-        return response()->json(['error' => 'Error al actualizar datos'], 500);
+        return response()->json(['error' => 'Error al actualizar datos'], 500); 
     }
     }
 

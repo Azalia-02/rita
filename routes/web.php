@@ -7,6 +7,7 @@ use App\Http\Controllers\ControladorPanel;
 use App\Http\Controllers\ControladorPacientes;
 use App\Http\Controllers\ControladorMedicos;
 use App\Http\Controllers\ControladorProductos;
+use App\Http\Controllers\ControladorCitas;
 
 
 
@@ -80,3 +81,7 @@ Route::name('producto_detalle')->get('/producto_detalle/{id}', [ControladorProdu
 Route::name('producto_actualizar')->get('/producto_actualizar/{id}', [ControladorProductos::class, 'producto_actualizar']);
 Route::name('producto_salvar')->post('/producto_salvar/{id}', [ControladorProductos::class, 'producto_salvar']);
 Route::name('producto_borrar')->get('/producto_borrar/{id}', [ControladorProductos::class, 'producto_borrar']);
+
+//-----------------------------Rutas_citas--------------------------------------------------------------------
+Route::name('citas')->get('/citas',[ControladorCitas::class, 'citas']);
+Route::name('guardar_cita')->post('/guardar_cita', [ControladorCitas::class, 'guardar_cita']);

@@ -41,7 +41,7 @@
             <div class="carousel-item">
                 <img src="{{ asset('img/citas.png') }}" alt="Citas">
                 <div class="content">
-                    <a href="{{ route('panel_admin') }}" class="btn btn-default btn-lg">Citas</a>
+                    <a href="{{ route('citas') }}" class="btn btn-default btn-lg">Citas</a>
                 </div>
             </div>
             <div class="carousel-item">

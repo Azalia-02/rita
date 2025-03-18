@@ -46,17 +46,17 @@
                     <td>{{ $producto['descripcion'] }}</td>
                     <td>
                         <a href="{{ route('producto_actualizar', $producto['id_producto']) }}">
-                            <button type="button" class="boton2">Editar</button>
+                            <button type="button" class="btn btn-info btn-sm">Editar</button>
                         </a>
                     </td>
                     <td>
                         <a href="{{ route('producto_borrar', $producto['id_producto']) }}">
-                            <button type="button" class="boton2">Eliminar</button>
+                            <button type="button" class="btn btn-info btn-sm">Eliminar</button>
                         </a>
                     </td>
                     <td>
                         <a href="{{ route('producto_detalle', $producto['id_producto']) }}">
-                            <button type="button" class="boton2">Consultar</button>
+                            <button type="button" class="btn btn-info btn-sm">Consultar</button>
                         </a>
                     </td>
                 </tr>
