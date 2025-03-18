@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="encabezado">
-        <img src="{{ 'img/dinologin.jpg' }}" alt="logo empresa" id="imgenbn">
+        <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
         <h1>Administrador</h1>
         <nav class="menu">
             <ul>
@@ -47,7 +47,7 @@
             <div class="carousel-item">
                 <img src="{{ asset('img/productos.png') }}" alt="Productos">
                 <div class="content">
-                    <a href="{{ route('panel_admin') }}" class="btn btn-default btn-lg">Productos</a>
+                    <a href="{{ route('productos') }}" class="btn btn-default btn-lg">Productos</a>
                 </div>
             </div>
         </div>
