@@ -31,6 +31,10 @@
         Exportar a Excel
         </a>
 
+        <a href="{{ route('grafica_medicos', ['search' => request('buscar')]) }}" class="btn btn-primary">
+        Ver Gráfica
+        </a>
+
         <form action="{{ route('import.medicos') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" required>

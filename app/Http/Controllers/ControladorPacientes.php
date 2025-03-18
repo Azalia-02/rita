@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ConsoleTVs\Charts\Facades\Charts;
 use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
@@ -205,4 +206,26 @@ class ControladorPacientes extends Controller
         }
     }
 
+    
+    public function mostrarGrafica(Request $request)
+    {
+        $search = $request->input('search');
+    
+        $query = DB::table('tb_pacientes');
+        if ($search) {
+            $query->where('nombre', 'LIKE', "%$search%");
+        }
+    
+        $pacientes = $query->select('sex', DB::raw('COUNT(*) as total'))->groupBy('sex')->get();
+    
+        $chart = Charts::create('bar', 'highcharts')
+            ->title('Pacientes por Sexo')
+            ->labels($pacientes->pluck('sex'))
+            ->values($pacientes->pluck('total'))
+            ->dimensions(1000, 500)
+            ->responsive(true);
+    
+        return view('grafica', compact('chart'));
+    }
+        
 }
