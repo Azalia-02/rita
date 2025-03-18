@@ -6,6 +6,7 @@ use App\Http\Controllers\ControladorUsuario;
 use App\Http\Controllers\ControladorPanel;
 use App\Http\Controllers\ControladorPacientes;
 use App\Http\Controllers\ControladorMedicos;
+use App\Http\Controllers\ControladorProductos;
 use App\Http\Controllers\GraficaController;
 use App\Http\Controllers\GraficaMedicos;
 
@@ -74,3 +75,13 @@ Route::name('medico_borrar')->get('/medico_borrar/{id}', [ControladorMedicos::cl
 Route::post('/medicos/import', [ControladorMedicos::class, 'import'])->name('import.medicos');
 Route::get('/export-medicos', [ControladorMedicos::class, 'export'])->name('export-medicos');
 Route::name('grafica_medicos')->get('/grafica_medicos', [GraficaMedicos::class, 'grafica_medicos']);
+
+//-----------------------------Rutas_productos--------------------------------------------------------------------
+Route::name('productos')->get('/productos',[ControladorProductos::class, 'productos']);
+Route::name('producto_alta')->get('/producto_alta', [ControladorProductos::class, 'producto_alta']);
+Route::name('producto_registrar')->post('/producto_registrar', [ControladorProductos::class, 'producto_registrar']);
+
+Route::name('producto_detalle')->get('/producto_detalle/{id}', [ControladorProductos::class, 'producto_detalle']);
+Route::name('producto_actualizar')->get('/producto_actualizar/{id}', [ControladorProductos::class, 'producto_actualizar']);
+Route::name('producto_salvar')->post('/producto_salvar/{id}', [ControladorProductos::class, 'producto_salvar']);
+Route::name('producto_borrar')->get('/producto_borrar/{id}', [ControladorProductos::class, 'producto_borrar']);

@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/mestilos.css') }}">
     <title>Lista de Pacientes</title>
 </head>
 <body>
+
+<div id="encabezado">
+        <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
+        <h1>Administrador</h1>
+    </div>
 
     <div class="container">
         <hr><br>
@@ -76,6 +81,8 @@
                 @endfor
             </ul>
         </nav>
+   
+    <a href="{{ route('panel_admin') }}" class="boton">Volver</a>
     </div>
 
 </body>

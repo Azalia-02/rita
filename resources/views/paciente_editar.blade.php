@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
     <title>Editar Paciente</title>
 </head>
 <body>
-<h2>Editar Paciente</h2>
+<div id="encabezado">
+        <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
+        <h1>Actualización de Pacientes</h1>
+    </div>
+    <center>
 <form action="{{ route('paciente_salvar', $data['id_paciente']) }}" method="post">
     
     @csrf
@@ -34,8 +39,10 @@
     <label for="tel">Teléfono</label>
     <input type="tel" name="tel" id="tel" value="{{ $data['tel'] }}"><br>
 
-    <button type="submit">Guardar</button>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+<a href="{{ route('pacientes') }}">
+<button type="button" class="btn btn-danger">Cancelar</button>
 </form>
-<a href="{{ route ('pacientes') }}" button="button">Volver a lista de pacientes</button>
+</center>
 </body>
 </html>

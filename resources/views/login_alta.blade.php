@@ -27,7 +27,7 @@
                 <h2>Regístrate</h2>
                 
                 <div class="form-floating mb-3">
-                <label for="floatingNombre">Ingresa tu nombre(s)</label>
+                    <label for="floatingNombre">Ingresa tu nombre(s)</label>
                     <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" id="floatingNombre" placeholder="ejemplo: Azalia" aria-describedby="NombreHelp">
                     <div id="NombreHelp" class="form-text">
                         @if($errors->first('nombre')) <i>¡El campo Nombre(s) no es correcto!</i> @endif
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingApp">Ingresa tu apellido(s)</label>
+                    <label for="floatingApp">Ingresa tu apellido(s)</label>
                     <input type="text" class="form-control" name="app" value="{{ old('app') }}" id="floatingApp" placeholder="ejemplo: Mejía" aria-describedby="ApellidoHelp">
                     <div id="AppHelp" class="form-text">
                         @if($errors->first('app')) <i>¡El campo Apellido(s) no es correcto!</i> @endif
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingApm">Ingresa tu apellido(s)</label>
+                    <label for="floatingApm">Ingresa tu apellido(s)</label>
                     <input type="text" class="form-control" name="apm" value="{{ old('apm') }}" id="floatingApm" placeholder="ejemplo: Mejía" aria-describedby="ApellidoHelp">
                     <div id="ApmHelp" class="form-text">
                         @if($errors->first('apm')) <i>¡El campo Apellido(s) no es correcto!</i> @endif
@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingEmail">Ingresa tu correo</label>
+                    <label for="floatingEmail">Ingresa tu correo</label>
                     <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="floatingEmail" placeholder="ejemplo: ejemplo@gmail.com" aria-describedby="EmailHelp">
                     <div id="EmailHelp" class="form-text">
                         @if($errors->first('email')) <i>¡El campo Correo no es correcto!</i> @endif
@@ -59,23 +59,22 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingPassword">Ingresa tu contraseña</label>
-                   <div class="input-group">
-                   <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="floatingPassword" placeholder="Ingresa tu contraseña">
-                   <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                   <i class="fa fa-eye">
-                   </button>
-                   </input>
-                   </div>
-                       @error('password')
-                   <div class="invalid-feedback">
-                       {{ $message }}
-                   </div>
-                       @enderror
-                   </div>
+                    <label for="floatingPassword">Ingresa tu contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="floatingPassword" placeholder="Ingresa tu contraseña">
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
 
                 <div class="form-floating mb-3">
-                <label for="floatingPasswordConfirmation">Repite tu contraseña</label>
+                    <label for="floatingPasswordConfirmation">Repite tu contraseña</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" id="floatingPasswordConfirmation" placeholder="Repite tu contraseña">
                     @error('password')
                         <div class="invalid-feedback">
@@ -87,8 +86,8 @@
                 <div class="form-floating mb-3">
                     <label for="rol">Selecciona el rol</label>
                     <select name="rol" class="form-control" id="rol">
-                    <option value="user" {{ old('rol') == 'user' ? 'selected' : '' }}>Usuario</option>
-                    <option value="admin" {{ old('rol') == 'admin' ? 'selected' : '' }}>Administrador</option>
+                        <option value="user" {{ old('rol') == 'user' ? 'selected' : '' }}>Usuario</option>
+                        <option value="admin" {{ old('rol') == 'admin' ? 'selected' : '' }}>Administrador</option>
                     </select>
                     <div class="form-text">
                         @if($errors->first('rol')) <i>¡El campo rol no es correcto!</i> @endif
@@ -99,7 +98,7 @@
 
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <a href="{{ route('login') }}">
-                <button type="button" class="btn btn-danger">Cancelar</button>
+                    <button type="button" class="btn btn-danger">Cancelar</button>
                 </a>
             </form>
         </center>
@@ -113,15 +112,12 @@
         const passwordInput = document.querySelector('#floatingPassword');
 
         togglePassword.addEventListener('click', function () {
-            // Cambia el tipo de input entre 'password' y 'text'
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
 
-            // Cambia el ícono del ojo
             const icon = this.querySelector('i');
             icon.classList.toggle('fa-eye');
             icon.classList.toggle('fa-eye-slash');
         });
     });
 </script>
-

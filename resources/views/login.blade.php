@@ -13,7 +13,6 @@
         </a>
         <nav class="menu">
             <ul>
-                <li><a href="#">Contactanos</a></li>
                 <li><a href="{{ route('login') }}" class="active">Ingresa</a></li>
             </ul>
         </nav>
