@@ -8,7 +8,8 @@ use App\Http\Controllers\ControladorPacientes;
 use App\Http\Controllers\ControladorMedicos;
 use App\Http\Controllers\ControladorProductos;
 use App\Http\Controllers\ControladorCitas;
-
+use App\Http\Controllers\GraficaController;
+use App\Http\Controllers\GraficaMedicos;
 
 
 /*
@@ -56,6 +57,9 @@ Route::name('paciente_borrar')->get('/paciente_borrar/{id}', [ControladorPacient
 //------------------------Exportacion e Importación excel--------------------------------------------------------------------------
 Route::post('/pacientes/import', [ControladorPacientes::class, 'import'])->name('import.pacientes');
 Route::get('/export-pacientes', [ControladorPacientes::class, 'export'])->name('export-pacientes');
+Route::get('/grafica-pacientes', [ControladorPacientes::class, 'mostrarGrafica'])->name('grafica.pacientes');
+
+Route::get('/grafica-pacientes', [GraficaController::class, 'mostrarGrafica'])->name('grafica.pacientes');
 
 
 //-----------------------------Rutas_medicos--------------------------------------------------------------------
@@ -71,6 +75,7 @@ Route::name('medico_borrar')->get('/medico_borrar/{id}', [ControladorMedicos::cl
 //------------------------Exportacion e Importación excel--------------------------------------------------------------------------
 Route::post('/medicos/import', [ControladorMedicos::class, 'import'])->name('import.medicos');
 Route::get('/export-medicos', [ControladorMedicos::class, 'export'])->name('export-medicos');
+Route::name('grafica_medicos')->get('/grafica_medicos', [GraficaMedicos::class, 'grafica_medicos']);
 
 //-----------------------------Rutas_productos--------------------------------------------------------------------
 Route::name('productos')->get('/productos',[ControladorProductos::class, 'productos']);

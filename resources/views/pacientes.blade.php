@@ -26,6 +26,8 @@
             </div>
         </form>
 
+    <hr><br>
+
         <p style="text-align: right;">
             <a href="{{ route('paciente_alta') }}">
                 <button type="button" class="btn btn-primary btn-sm">Nuevo Registro</button>
@@ -36,6 +38,9 @@
         Exportar a Excel
         </a>
 
+        <a href="{{ route('grafica.pacientes', ['search' => request('buscar')]) }}" class="btn btn-primary">
+        Ver Gráfica
+        </a>
             <form action="{{ route('import.pacientes') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="file" required>
