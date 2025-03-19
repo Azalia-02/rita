@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class ControladorLogin extends Controller
 {
@@ -34,19 +36,12 @@ class ControladorLogin extends Controller
             $isPasswordValid = password_verify($request->password, $hashedPassword);
 
             if ($isPasswordValid) {
-                
                 if (isset($user['rol'])) {
                     switch ($user['rol']) {
                         case 'admin':
-                            if ($response->successful()) {
-                                return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
-                            } else {
-                                return redirect()->route('login')->withErrors('Error al obtener los datos de los admiistradores.');
-                            }
-                    
+                            return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
                         case 'user':
                             return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
-                    
                         default:
                             return redirect()->route('login')->withErrors('Rol no válido.');
                     }
@@ -60,9 +55,16 @@ class ControladorLogin extends Controller
             return redirect()->route('login')->withErrors('Correo o contraseña incorrectos.');
         }
     } else {
-        return redirect()->route('login')->withErrors('Error al comunicarse con el servidor.');
+        $errorMessage = 'Error al comunicarse con el servidor.';
+        if ($response->status() === 429) {
+            $errorMessage = $response->json()['error'];
+        } elseif ($response->status() === 401) {
+            $errorMessage = 'Correo o contraseña incorrectos.';
+        }
+
+        return redirect()->route('login')->withErrors($errorMessage);
     }
-  }
+    }
 
     public function login_alta(){
         return view("login_alta");
