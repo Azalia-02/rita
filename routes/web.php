@@ -34,8 +34,11 @@ Route::name('login_registrar')->post('/login_registrar', [ControladorLogin::clas
 Route::name('logados')->get('/logados', [ControladorLogin::class, 'logados']);
 Route::name('logout')->post('/logout', [ControladorLogin::class, 'logout']);
 
+Route::name('home')->get('/home', [ControladorUsuario::class, 'home']);
 Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user']);
+Route::name('nosotros')->get('/nosotros', [ControladorUsuario::class, 'nosotros']);
 Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin']);
+Route::name('productosu')->get('/productosu',[ControladorUsuario::class, 'productosu']);
 
 
 // Rutas agregadas para las gráficas

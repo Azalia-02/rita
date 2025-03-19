@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ControladorUsuario extends Controller
 {
@@ -10,4 +11,27 @@ class ControladorUsuario extends Controller
 
         return view('home_user');
     }
+
+    public function home(){
+
+        return view('home');
+    }
+
+    public function nosotros(){
+
+        return view('nosotros');
+    }
+
+    public function productosu(Request $request)
+    {
+        $response = Http::get('http://localhost:3000/api/productos/');
+
+        if ($response->successful()) {
+            $data = $response->json();
+            return view('productosu', compact('data'));
+        } else {
+            return response()->json(['error' => 'Error al consultar la API'], 500);
+        }
+    }
+        
 }

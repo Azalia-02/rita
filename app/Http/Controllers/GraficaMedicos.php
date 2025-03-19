@@ -17,7 +17,7 @@ class GraficaMedicos extends Controller
     
         // Verificar si la respuesta tiene datos
         if (!isset($data['hombres'])) {
-            return view('grafica', ['chart' => null]);
+            return view('grafica_medicos', ['chart' => null]);
         }
     
         // Obtener el número de hombres y mujeres

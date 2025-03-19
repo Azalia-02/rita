@@ -36,7 +36,7 @@
                 Exportar a Excel
             </a>
 
-            <a href="{{ route('grafica.pacientes', ['search' => request('buscar')]) }}" class="btn btn-primary">
+            <a href="{{ route('grafica_medicos', ['search' => request('buscar')]) }}" class="btn btn-primary">
             Ver Gráfica
             </a>
 
