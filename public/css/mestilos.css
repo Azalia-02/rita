@@ -1,7 +1,14 @@
+body {
+    background-color: #014259;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
 #encabezado {
-    background-color: rgb(255, 255, 255);
-    text-align: center;
-    padding: 10px;
+    background-color: #ffffff;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,11 +29,59 @@
     border-radius: 10px;
 }
 
-body {
-    background-color: #014259;
-    font-family: Arial, sans-serif;
+.menu ul {
+    list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    display: block;
+    padding: 40px 40px;
+    color: #014259;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #014259;
+    color: white;
+}
+
+.menu li.desp .cont_cj {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.menu li.desp:hover .cont_cj {
+    display: block;
+}
+
+.menu li.desp .cont_cj a {
+    padding: 40px 40px;
+    display: block;
+    color: #014259;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.menu li.desp .cont_cj a:hover {
+    background-color: #014259;
+    color: white;
 }
 
 .container {
@@ -38,7 +93,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
+h2, h3 {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     color: #014259;
@@ -63,6 +118,12 @@ h2 {
     border: 2px solid #ccc;
     border-radius: 7px;
     font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #014259;
+    outline: none;
 }
 
 textarea.form-control {
@@ -71,6 +132,7 @@ textarea.form-control {
     border: 2px solid #ccc;
     border-radius: 7px;
     font-size: 16px;
+    resize: vertical;
 }
 
 .btn {
@@ -80,6 +142,7 @@ textarea.form-control {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-primary {
@@ -89,7 +152,47 @@ textarea.form-control {
 }
 
 .btn-primary:hover {
-    background-color: #9cc6ca;
+    background-color: #014259;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
 }
 
 .table {
@@ -115,4 +218,51 @@ textarea.form-control {
 
 .table tr:hover {
     background-color: #f1f1f1;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.page-item {
+    margin: 0;
+}
+
+.page-link {
+    padding: 8px 12px;
+    border: 1px solid #014259;
+    border-radius: 5px;
+    color: #014259;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.page-item.active .page-link {
+    background-color: #014259;
+    color: white;
+}
+
+.page-link:hover {
+    background-color: #014259;
+    color: white;
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #014259;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #9cc6ca;
 }

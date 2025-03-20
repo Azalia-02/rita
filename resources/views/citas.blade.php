@@ -10,6 +10,18 @@
     <div id="encabezado">
         <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
         <h1>Citas</h1>
+        <nav class="menu">
+            <ul>
+		    	<li class="desp">
+                    <a href="javascript:void(0)" class="menu">Menú de navegación</a>
+                    <div class="cont_cj">
+                        <a href="{{ route('medicos') }}">Medicos</a>
+                        <a href="{{ route('pacientes') }}">Pacientes</a>
+                        <a href="{{ route('productos') }}">Productos</a>
+                    </div>
+                </li> 
+		    </ul>
+        </nav>
     </div>
 
     <div class="container">

@@ -12,6 +12,18 @@
             <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
         </a>
         <h1>Productos</h1>
+        <nav class="menu">
+            <ul>
+		    	<li class="desp">
+                    <a href="javascript:void(0)" class="menu">Menú de navegación</a>
+                    <div class="cont_cj">
+                        <a href="{{ route('medicos') }}">Medicos</a>
+                        <a href="{{ route('pacientes') }}">Pacientes</a>
+                        <a href="{{ route('citas') }}">Citas</a>
+                    </div>
+                </li> 
+		    </ul>
+        </nav>
     </div>
     <br>
     <div class="container">
