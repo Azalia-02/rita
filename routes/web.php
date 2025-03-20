@@ -7,6 +7,7 @@ use App\Http\Controllers\ControladorPanel;
 use App\Http\Controllers\ControladorPacientes;
 use App\Http\Controllers\ControladorMedicos;
 use App\Http\Controllers\ControladorProductos;
+use App\Http\Controllers\ControladorCitas;
 use App\Http\Controllers\GraficaController;
 use App\Http\Controllers\GraficaMedicos;
 
@@ -33,8 +34,11 @@ Route::name('login_registrar')->post('/login_registrar', [ControladorLogin::clas
 Route::name('logados')->get('/logados', [ControladorLogin::class, 'logados']);
 Route::name('logout')->post('/logout', [ControladorLogin::class, 'logout']);
 
+Route::name('home')->get('/home', [ControladorUsuario::class, 'home']);
 Route::name('home_user')->get('/home_user', [ControladorUsuario::class, 'home_user']);
+Route::name('nosotros')->get('/nosotros', [ControladorUsuario::class, 'nosotros']);
 Route::name('panel_admin')->get('/panel_admin', [ControladorPanel::class, 'panel_admin']);
+Route::name('productosu')->get('/productosu',[ControladorUsuario::class, 'productosu']);
 
 
 // Rutas agregadas para las gráficas
@@ -85,3 +89,7 @@ Route::name('producto_detalle')->get('/producto_detalle/{id}', [ControladorProdu
 Route::name('producto_actualizar')->get('/producto_actualizar/{id}', [ControladorProductos::class, 'producto_actualizar']);
 Route::name('producto_salvar')->post('/producto_salvar/{id}', [ControladorProductos::class, 'producto_salvar']);
 Route::name('producto_borrar')->get('/producto_borrar/{id}', [ControladorProductos::class, 'producto_borrar']);
+
+//-----------------------------Rutas_citas--------------------------------------------------------------------
+Route::name('citas')->get('/citas',[ControladorCitas::class, 'citas']);
+Route::name('guardar_cita')->post('/guardar_cita', [ControladorCitas::class, 'guardar_cita']);

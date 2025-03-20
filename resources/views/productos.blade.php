@@ -12,6 +12,18 @@
             <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
         </a>
         <h1>Productos</h1>
+        <nav class="menu">
+            <ul>
+		    	<li class="desp">
+                    <a href="javascript:void(0)" class="menu">Menú de navegación</a>
+                    <div class="cont_cj">
+                        <a href="{{ route('medicos') }}">Medicos</a>
+                        <a href="{{ route('pacientes') }}">Pacientes</a>
+                        <a href="{{ route('citas') }}">Citas</a>
+                    </div>
+                </li> 
+		    </ul>
+        </nav>
     </div>
     <br>
     <div class="container">
@@ -46,17 +58,17 @@
                     <td>{{ $producto['descripcion'] }}</td>
                     <td>
                         <a href="{{ route('producto_actualizar', $producto['id_producto']) }}">
-                            <button type="button" class="boton2">Editar</button>
+                            <button type="button" class="btn btn-info btn-sm">Editar</button>
                         </a>
                     </td>
                     <td>
                         <a href="{{ route('producto_borrar', $producto['id_producto']) }}">
-                            <button type="button" class="boton2">Eliminar</button>
+                            <button type="button" class="btn btn-info btn-sm">Eliminar</button>
                         </a>
                     </td>
                     <td>
                         <a href="{{ route('producto_detalle', $producto['id_producto']) }}">
-                            <button type="button" class="boton2">Consultar</button>
+                            <button type="button" class="btn btn-info btn-sm">Consultar</button>
                         </a>
                     </td>
                 </tr>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('apm', 50);
             $table->date('fn');
             $table->set('sex', ['Femenino', 'Masculino']);
-            $table->integer('tel');
+            $table->string('tel');
             $table->text('email');
             $table->timestamps();
         });

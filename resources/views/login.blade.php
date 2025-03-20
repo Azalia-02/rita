@@ -8,7 +8,7 @@
     </head>
 <body>
     <div id="encabezado">
-        <a href="#">
+        <a href="{{ route('home') }}">
         <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
         </a>
         <nav class="menu">

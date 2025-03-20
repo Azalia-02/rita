@@ -10,6 +10,18 @@
     <div id="encabezado">
         <img src="{{ asset('img/dinologin.jpg') }}" alt="logo empresa" id="imgenbn">
         <h1>Administrador</h1>
+        <nav class="menu">
+            <ul>
+		    	<li class="desp">
+                    <a href="javascript:void(0)" class="menu">Menú de navegación</a>
+                    <div class="cont_cj">
+                        <a href="{{ route('pacientes') }}">Pacientes</a>
+                        <a href="{{ route('productos') }}">Productos</a>
+                        <a href="{{ route('citas') }}">Citas</a>
+                    </div>
+                </li> 
+		    </ul>
+        </nav>
     </div>
 
     <div class="container">
@@ -20,6 +32,7 @@
         <form action="{{ route('medicos') }}" method="GET" class="search-form">
             <div class="input-group">
                 <input type="text" class="form-control" name="buscar" value="{{ request('buscar') }}" placeholder="Buscar medico...">
+                <br><br>
                 <button type="submit" class="btn btn-primary">Buscar</button>
                 <a href="{{ route('medicos') }}" class="btn btn-danger">Reiniciar</a>
             </div>
@@ -38,7 +51,7 @@
 
             <a href="{{ route('grafica_medicos', ['search' => request('buscar')]) }}" class="btn btn-primary">
             Ver Gráfica
-            </a><br>
+            </a>
 
             <form action="{{ route('import.medicos') }}" method="POST" enctype="multipart/form-data" class="import-form">
                 @csrf
