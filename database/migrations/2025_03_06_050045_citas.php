@@ -10,10 +10,10 @@ class citas extends Migration
     {
         Schema::create('tb_citas', function (Blueprint $table) {
             $table->bigIncrements('id_cita'); 
-            $table->date('fecha'); 
-            $table->time('hora'); 
             $table->unsignedBigInteger('id_paciente'); 
-            $table->unsignedBigInteger('id_medico'); 
+	    $table->unsignedBigInteger('id_medico');
+	    $table->date('fecha');
+	    $table->time('hora'); 
             $table->text('detalle'); 
             $table->timestamps(); 
         });

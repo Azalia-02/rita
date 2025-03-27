@@ -101,7 +101,7 @@ class ControladorMedicos extends Controller
         $limit = 6; // Cantidad de pacientes por página
 
         // Hacer la solicitud GET a la API con los filtros
-        $response = Http::get('http://localhost:3000/api/medicos/', [
+        $response = Http::get('http://3.83.41.64:3003/api/medicos/', [
             'search' => $search, 
             'page' => $page, 
             'limit' => $limit
@@ -126,7 +126,7 @@ class ControladorMedicos extends Controller
 
     public function medico_detalle($id){
         // Hacemos una solicitud GET a una Api externa
-        $response = Http::get('http://localhost:3000/api/medicos/'. $id);
+        $response = Http::get('http://3.83.41.64:3003/api/medicos/'. $id);
 
         // Verificamos si la solicitud fue exitosa
         if ($response->successful()) {
@@ -145,7 +145,7 @@ class ControladorMedicos extends Controller
     }
 
     public function medico_registrar(Request $request){
-        $response = Http::post('http://localhost:3000/api/medicos/', [
+        $response = Http::post('http://3.83.41.64:3003/api/medicos/', [
             'clave' => $request->clave,
             'nombre' => $request->nombre,
             'app' => $request->app,
@@ -166,7 +166,7 @@ class ControladorMedicos extends Controller
     }
 
     public function medico_actualizar($id){
-        $response = Http::get ('http://localhost:3000/api/medicos/'. $id);
+        $response = Http::get ('http://3.83.41.64:3003/api/medicos/'. $id);
 
         $data = $response->json();
 
@@ -176,7 +176,7 @@ class ControladorMedicos extends Controller
 
     public function medico_salvar(Request $request)
     {
-        $response = Http::put('http://localhost:3000/api/medicos/'.$request->id, [
+        $response = Http::put('http://3.83.41.64:3003/api/medicos/'.$request->id, [
             'clave' => $request->clave,
             'nombre' => $request->nombre,
             'app' => $request->app,
@@ -199,7 +199,7 @@ class ControladorMedicos extends Controller
     {
         //dd($id);
         //Hacemos una solicitud DELETE la API para eliminar el recurso
-        $response = Http::delete('http://localhost:3000/api/medicos/'. $id);
+        $response = Http::delete('http://3.83.41.64:3003/api/medicos/'. $id);
         
         //verificamos si la solicitud fue exitosa
         if ($response->successful()) {

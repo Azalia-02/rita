@@ -10,7 +10,7 @@ class ControladorProductos extends Controller
 {
     public function productos(Request $request)
     {
-        $response = Http::get('http://localhost:3000/api/productos/');
+        $response = Http::get('http://3.83.41.64:3003/api/productos/');
 
         if ($response->successful()) {
             $data = $response->json();
@@ -22,7 +22,7 @@ class ControladorProductos extends Controller
     
 
     public function producto_detalle($id){
-        $response = Http::get('http://localhost:3000/api/productos/'. $id);
+        $response = Http::get('http://3.83.41.64:3003/api/productos/'. $id);
 
         if ($response->successful()) {
             $data = $response->json();
@@ -45,7 +45,7 @@ class ControladorProductos extends Controller
             return redirect()->back()->with('error', 'No se ha subido ninguna foto.');
         }
 
-        $response = Http::post('http://localhost:3000/api/productos/', [
+        $response = Http::post('http://3.83.41.64:3003/api/productos/', [
             'nombre' => $request->nombre,
             'precio' => $request->precio,
             'descripcion' => $request->descripcion,
@@ -69,7 +69,7 @@ class ControladorProductos extends Controller
         $fotoUrl = $request->imagen_actual;
     }
 
-    $response = Http::put('http://localhost:3000/api/productos/' . $id, [
+    $response = Http::put('http://3.83.41.64:3003/api/productos/' . $id, [
         'nombre' => $request->nombre,
         'precio' => $request->precio,
         'descripcion' => $request->descripcion,
@@ -85,7 +85,7 @@ class ControladorProductos extends Controller
     }
 
     public function producto_actualizar($id){
-    $response = Http::get('http://localhost:3000/api/productos/' . $id);
+    $response = Http::get('http://3.83.41.64:3003/api/productos/' . $id);
 
     if ($response->successful()) {
         $data = $response->json();
@@ -98,7 +98,7 @@ class ControladorProductos extends Controller
 
     public function producto_borrar($id)
     {
-        $response = Http::delete('http://localhost:3000/api/productos/'. $id);
+        $response = Http::delete('http://3.83.41.64:3003/api/productos/'. $id);
         
         if ($response->successful()) {
             return redirect()->route('productos');

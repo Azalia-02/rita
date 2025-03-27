@@ -12,7 +12,7 @@ class GraficaController extends Controller
     public function mostrarGrafica()
     {
         // Obtener datos de la API
-        $response = Http::get('http://localhost:3000/api/contar-por-sexo');
+        $response = Http::get('http://3.83.41.64:3003/api/contar-por-sexo');
         $data = $response->json();
     
         // Verificar si la respuesta tiene datos

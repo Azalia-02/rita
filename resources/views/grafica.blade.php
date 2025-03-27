@@ -78,7 +78,7 @@ $(document).ready(function () {
 
     function cargarGraficaNombres(busqueda = '') {
         $.ajax({
-            url: 'http://localhost:3000/api/pacientes',
+            url: 'http://3.83.41.64:3003/api/pacientes',
             type: 'GET',
             data: { search: busqueda, limit: 100 },
             success: function (response) {
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     function cargarGraficaSexo() {
         $.ajax({
-            url: 'http://localhost:3000/api/contar-por-sexo',
+            url: 'http://3.83.41.64:3003/api/contar-por-sexo',
             type: 'GET',
             success: function (response) {
                 console.log("Datos recibidos para sexo:", response);

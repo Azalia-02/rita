@@ -12,7 +12,7 @@ class GraficaMedicos extends Controller
     public function grafica_medicos()
     {
         // Obtener datos de la API
-        $response = Http::get('http://localhost:3000/api/medicos-por-sexo');
+        $response = Http::get('http://3.83.41.64:3003/api/medicos-por-sexo');
         $data = $response->json();
     
         // Verificar si la respuesta tiene datos
