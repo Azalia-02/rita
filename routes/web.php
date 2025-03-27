@@ -10,6 +10,7 @@ use App\Http\Controllers\ControladorProductos;
 use App\Http\Controllers\ControladorCitas;
 use App\Http\Controllers\GraficaController;
 use App\Http\Controllers\GraficaMedicos;
+use App\Http\Controllers\SensorController;
 
 
 /*
@@ -93,3 +94,12 @@ Route::name('producto_borrar')->get('/producto_borrar/{id}', [ControladorProduct
 //-----------------------------Rutas_citas--------------------------------------------------------------------
 Route::name('citas')->get('/citas',[ControladorCitas::class, 'citas']);
 Route::name('guardar_cita')->post('/guardar_cita', [ControladorCitas::class, 'guardar_cita']);
+
+
+
+//-----------------------------sensores--------------------------------------------------------------------
+
+Route::get('/sensores', [SensorController::class, 'mostrarSensores'])->name('sensores');
+Route::post('/api/sensores', [SensorController::class, 'store'])->name('api.sensores.store');
+Route::get('/api/sensores', [SensorController::class, 'index_data'])->name('api.sensores.index');
+Route::get('/api/sensores/{id_login}', [SensorController::class, 'show'])->name('api.sensores.show');

@@ -1,0 +1,50 @@
+/* Estilo general de las tarjetas */
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card-container {
+    width: 300px;
+    background: linear-gradient(to top right, #975af4, #2f7cf8 40%, #78aafa 65%, #934cff 100%);
+    padding: 4px;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+}
+
+.title-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    padding: 16px;
+}
+
+.card-content {
+    background-color: #161a20;
+    border-radius: 30px;
+    color: #838383;
+    font-size: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-content .title {
+    font-weight: 600;
+    color: #bab9b9;
+}
+
+.card-content .value {
+    font-size: 18px;
+    color: #fff;
+}

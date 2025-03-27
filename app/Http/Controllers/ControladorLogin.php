@@ -41,7 +41,7 @@ class ControladorLogin extends Controller
                         case 'admin':
                             return redirect()->route('panel_admin')->with('success', 'Has iniciado sesión como administrador.');
                         case 'user':
-                            return redirect()->route('home_user')->with('success', 'Has iniciado sesión como usuario.');
+                            return redirect()->route('sensores')->with('success', 'Has iniciado sesión como usuario.');
                         default:
                             return redirect()->route('login')->withErrors('Rol no válido.');
                     }
