@@ -100,6 +100,10 @@ Route::name('guardar_cita')->post('/guardar_cita', [ControladorCitas::class, 'gu
 //-----------------------------sensores--------------------------------------------------------------------
 
 Route::get('/sensores', [SensorController::class, 'mostrarSensores'])->name('sensores');
+
+Route::get('/sensores/cards', [SensorController::class, 'mostrarTarjetas'])->name('sensores.cards');
+
+
 Route::post('/api/sensores', [SensorController::class, 'store'])->name('api.sensores.store');
 Route::get('/api/sensores', [SensorController::class, 'index_data'])->name('api.sensores.index');
 Route::get('/api/sensores/{id_login}', [SensorController::class, 'show'])->name('api.sensores.show');

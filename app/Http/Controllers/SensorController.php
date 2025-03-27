@@ -102,4 +102,23 @@ class SensorController extends Controller
             return response()->json(['mensaje' => 'No encontrado'], 404);
         }
     }
+
+    public function mostrarTarjetas()
+{
+    $apiUrl = 'http://localhost:3000/api/sensores';
+
+    try {
+        $response = Http::get($apiUrl);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            return view('partials.cards-sensores', ['sensores' => $data]);
+        }
+
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error al obtener los datos'], 500);
+    }
+}
+
+
 }

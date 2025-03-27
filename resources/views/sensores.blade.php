@@ -56,10 +56,9 @@
 <div class="container mt-5">
     <br>
 
-    <!-- Incluir la vista parcial con las tarjetas -->
-    <div id="cards-container" class="container-cards">
-    @include('partials.cards-sensores', ['sensores' => $sensores])
-
+        <!-- Incluir solo las tarjetas sin el logo duplicado -->
+        <div id="cards-container" class="container-cards">
+        @include('partials.cards-sensores', ['sensores' => $sensores])
     </div>
 
     <!-- Paginación -->
@@ -71,18 +70,17 @@
   // ✅ Actualización automática cada 5 segundos
   setInterval(() => {
         $.ajax({
-            url: "{{ route('sensores') }}",  
+            url: "{{ route('sensores.cards') }}",   // ⚠️ Nueva ruta que solo carga las tarjetas
             method: 'GET',
             success: function (data) {
-                $('#cards-container').html(data);
-                
+                $('#cards-container').html(data);  // ✅ Actualiza solo las tarjetas
             },
             error: function () {
                 console.error('Error al cargar los datos');
             }
         });
     }, 1000);
-
 </script>
+
 </body>
 </html>
