@@ -13,17 +13,17 @@ class SensorController extends Controller
     public function mostrarSensores(Request $request)
     {
         $apiUrl = 'http://3.83.41.64:3003/api/sensores';
-
+    
         try {
             $response = Http::get($apiUrl);
-
+    
             if ($response->successful()) {
                 $data = $response->json();
-
+    
                 $currentPage = LengthAwarePaginator::resolveCurrentPage();
                 $perPage = 10;
                 $currentPageData = array_slice($data, ($currentPage - 1) * $perPage, $perPage);
-
+    
                 $sensores = new LengthAwarePaginator(
                     $currentPageData,
                     count($data),
@@ -31,15 +31,19 @@ class SensorController extends Controller
                     $currentPage,
                     ['path' => $request->url()]
                 );
-
-                return view('sensores', compact('sensores'));
             } else {
-                return view('sensores')->withErrors(['error' => 'Error al conectar con la API']);
+                // ✅ Aquí corregimos el problema
+                $sensores = new LengthAwarePaginator([], 0, 10, 1, ['path' => $request->url()]);
             }
         } catch (\Exception $e) {
-            return view('sensores')->withErrors(['error' => 'Error al conectar con la API: ' . $e->getMessage()]);
+            // ✅ También corregimos en caso de error
+            $sensores = new LengthAwarePaginator([], 0, 10, 1, ['path' => $request->url()]);
         }
+    
+        return view('sensores', compact('sensores'))->withErrors(['error' => 'Error al conectar con la API']);
     }
+    
+    
 
     // ✅ Método para insertar o actualizar los datos
     public function store(Request $request)
