@@ -91,7 +91,7 @@ $(document).ready(function () {
     // Función para cargar datos de médicos por nombre
     function cargarGraficaNombres(busqueda = '') {
         $.ajax({
-            url: 'http://localhost:3000/api/medicos',
+            url: 'http://3.83.41.64:3003/api/medicos',
             type: 'GET',
             data: { search: busqueda, limit: 100 },
             success: function (response) {
@@ -126,7 +126,7 @@ $(document).ready(function () {
     // Función para cargar datos de médicos por sexo
     function cargarGraficaSexo() {
     $.ajax({
-        url: 'http://localhost:3000/api/medicos-por-sexo',
+        url: 'http://3.83.41.64:3003/api/medicos-por-sexo',
         type: 'GET',
         success: function (response) {
             console.log("Datos recibidos para sexo:", response); // Verifica datos

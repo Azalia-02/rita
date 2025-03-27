@@ -22,7 +22,7 @@ class ControladorLogin extends Controller
         'password' => 'required',
     ]);
 
-    $response = Http::post('http://localhost:3000/api/redirige/', [
+    $response = Http::post('http://3.83.41.64:3003/api/redirige/', [
         'email' => $request->email,
         'password' => $request->password,
     ]);
@@ -102,7 +102,7 @@ class ControladorLogin extends Controller
         'rol.in' => 'El rol no es válido. Debe ser "admin" o "user".',
     ]);
 
-    $response = Http::post('http://localhost:3000/api/registros/', [
+    $response = Http::post('http://3.83.41.64:3003/api/registros/', [
         'nombre' => $request->input('nombre'),
         'app' => $request->input('app'),
         'apm' => $request->input('apm'),

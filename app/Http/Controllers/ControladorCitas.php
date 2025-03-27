@@ -10,9 +10,9 @@ class ControladorCitas extends Controller
 {
 public function citas(Request $request)
 {
-    $responseCitas = Http::get('http://localhost:3000/api/citas/');
-    $responsePacientes = Http::get('http://localhost:3000/api/pacientes/');
-    $responseMedicos = Http::get('http://localhost:3000/api/medicos/');
+    $responseCitas = Http::get('http://3.83.41.64:3003/api/citas/');
+    $responsePacientes = Http::get('http://3.83.41.64:3003/api/pacientes/');
+    $responseMedicos = Http::get('http://3.83.41.64:3003/api/medicos/');
 
     if ($responseCitas->successful() && $responsePacientes->successful() && $responseMedicos->successful()) {
         $citas = $responseCitas->json();
@@ -35,7 +35,7 @@ public function guardar_cita(Request $request)
         'detalle' => 'required|string|max:255',
     ]);
 
-    $response = Http::post('http://localhost:3000/api/citas/', [
+    $response = Http::post('http://3.83.41.64:3003/api/citas/', [
         'id_paciente' => $request->paciente,
         'id_medico' => $request->medico,
         'hora' => $request->hora,

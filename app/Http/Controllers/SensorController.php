@@ -12,7 +12,7 @@ class SensorController extends Controller
     // ✅ Método para mostrar la vista con los datos de los sensores
     public function mostrarSensores(Request $request)
     {
-        $apiUrl = 'http://localhost:3000/api/sensores';
+        $apiUrl = 'http://3.83.41.64:3003/api/sensores';
 
         try {
             $response = Http::get($apiUrl);

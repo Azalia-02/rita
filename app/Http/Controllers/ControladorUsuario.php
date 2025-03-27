@@ -24,7 +24,7 @@ class ControladorUsuario extends Controller
 
     public function productosu(Request $request)
     {
-        $response = Http::get('http://localhost:3000/api/productos/');
+        $response = Http::get('http://3.83.41.64:3003/api/productos/');
 
         if ($response->successful()) {
             $data = $response->json();
